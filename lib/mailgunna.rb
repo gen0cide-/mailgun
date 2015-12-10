@@ -4,24 +4,24 @@ require "multimap/lib/multimap"
 require "multimap/lib/multiset"
 require "multimap/lib/nested_multimap"
 
-require "mailgunnana/mailgunna_error"
-require "mailgunnana/base"
-require "mailgunnana/domain"
-require "mailgunnana/route"
-require "mailgunnana/mailbox"
-require "mailgunnana/bounce"
-require "mailgunnana/unsubscribe"
-require "mailgunnana/complaint"
-require "mailgunnana/log"
-require "mailgunnana/list"
-require "mailgunnana/list/member"
-require "mailgunnana/message"
-require "mailgunnana/secure"
+require "mailgunna/mailgunna_error"
+require "mailgunna/base"
+require "mailgunna/domain"
+require "mailgunna/route"
+require "mailgunna/mailbox"
+require "mailgunna/bounce"
+require "mailgunna/unsubscribe"
+require "mailgunna/complaint"
+require "mailgunna/log"
+require "mailgunna/list"
+require "mailgunna/list/member"
+require "mailgunna/message"
+require "mailgunna/secure"
 
 #require "startup"
 
-def Mailgunnana(options={})
-  options[:api_key] = Mailgunnana.api_key if Mailgunnana.api_key
-  options[:domain] = Mailgunnana.domain if Mailgunnana.domain
-  Mailgunnana::Base.new(options)
+def Mailgunna(options={})
+  options[:api_key] = Mailgunna.api_key if Mailgunna.api_key
+  options[:domain] = Mailgunna.domain if Mailgunna.domain
+  Mailgunna::Base.new(options)
 end
