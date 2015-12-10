@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Mailgun::Complaint do
+describe Mailgunna::Complaint do
 
   before :each do
-    @mailgun = Mailgun({:api_key => "api-key"})
+    @mailgunna = Mailgunna({:api_key => "api-key"})
 
     @sample = {
-      :email  => "test@sample.mailgun.org",
+      :email  => "test@sample.mailgunna.org",
       :name   => "test",
-      :domain => "sample.mailgun.org"
+      :domain => "sample.mailgunna.org"
     }
   end
 
@@ -27,13 +27,13 @@ describe Mailgun::Complaint do
 }
 EOF
 
-      complaints_url = @mailgun.complaints(@sample[:domain]).send(:complaint_url)
+      complaints_url = @mailgunna.complaints(@sample[:domain]).send(:complaint_url)
 
-      Mailgun.should_receive(:submit).
+      Mailgunna.should_receive(:submit).
         with(:get, complaints_url, {}).
         and_return(sample_response)
 
-      @mailgun.complaints(@sample[:domain]).list
+      @mailgunna.complaints(@sample[:domain]).list
     end
   end
 
@@ -47,13 +47,13 @@ EOF
 }
 EOF
 
-      complaints_url = @mailgun.complaints(@sample[:domain]).send(:complaint_url)
+      complaints_url = @mailgunna.complaints(@sample[:domain]).send(:complaint_url)
 
-      Mailgun.should_receive(:submit)
+      Mailgunna.should_receive(:submit)
         .with(:post, complaints_url, {:address => @sample[:email]})
         .and_return(sample_response)
 
-      @mailgun.complaints(@sample[:domain]).add(@sample[:email])
+      @mailgunna.complaints(@sample[:domain]).add(@sample[:email])
     end
   end
 
@@ -70,13 +70,13 @@ EOF
 }
 EOF
 
-      complaints_url = @mailgun.complaints(@sample[:domain]).send(:complaint_url, @sample[:email])
+      complaints_url = @mailgunna.complaints(@sample[:domain]).send(:complaint_url, @sample[:email])
 
-      Mailgun.should_receive(:submit)
+      Mailgunna.should_receive(:submit)
         .with(:get, complaints_url)
         .and_return(sample_response)
 
-      @mailgun.complaints(@sample[:domain]).find(@sample[:email])
+      @mailgunna.complaints(@sample[:domain]).find(@sample[:email])
     end
   end
 
@@ -90,13 +90,13 @@ EOF
 }
 EOF
 
-      complaints_url = @mailgun.complaints(@sample[:domain]).send(:complaint_url, @sample[:email])
+      complaints_url = @mailgunna.complaints(@sample[:domain]).send(:complaint_url, @sample[:email])
 
-      Mailgun.should_receive(:submit)
+      Mailgunna.should_receive(:submit)
         .with(:delete, complaints_url)
         .and_return(sample_response)
 
-      @mailgun.complaints(@sample[:domain]).destroy(@sample[:email])
+      @mailgunna.complaints(@sample[:domain]).destroy(@sample[:email])
     end
   end
 

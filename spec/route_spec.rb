@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe Mailgun::Route do
+describe Mailgunna::Route do
 
   before :each do
-    @mailgun = Mailgun({:api_key => "api-key"})		# used to get the default values
+    @mailgunna = Mailgunna({:api_key => "api-key"})		# used to get the default values
     @sample_route_id = "a45cd"
   end
 
@@ -16,17 +16,17 @@ describe Mailgun::Route do
 }
 EOF.to_json
 
-      Mailgun.should_receive(:submit).
-        with(:get, "#{@mailgun.routes.send(:route_url)}", {}).
+      Mailgunna.should_receive(:submit).
+        with(:get, "#{@mailgunna.routes.send(:route_url)}", {}).
         and_return(sample_response)
     end
 
     it "should make a GET request with the right params" do
-      @mailgun.routes.list
+      @mailgunna.routes.list
     end
 
     it "should respond with an Array" do
-      @mailgun.routes.list.should be_kind_of(Array)
+      @mailgunna.routes.list.should be_kind_of(Array)
     end
   end
 
@@ -42,17 +42,17 @@ EOF.to_json
           "stop()"
       ],
       "priority": 1,
-      "expression": "match_recipient(\".*@samples.mailgun.org\")",
+      "expression": "match_recipient(\".*@samples.mailgunna.org\")",
       "id": "4f3bad2335335426750048c6"
   }
 }
 EOF
 
-      Mailgun.should_receive(:submit).
-        with(:get, "#{@mailgun.routes.send(:route_url, @sample_route_id)}").
+      Mailgunna.should_receive(:submit).
+        with(:get, "#{@mailgunna.routes.send(:route_url, @sample_route_id)}").
         and_return(sample_response)
 
-      @mailgun.routes.find @sample_route_id
+      @mailgunna.routes.find @sample_route_id
     end
   end
 
@@ -62,14 +62,14 @@ EOF
 
       options[:description] = "test_route"
       options[:priority]    = 1
-      options[:expression]  = [:match_recipient, "sample.mailgun.org"]
+      options[:expression]  = [:match_recipient, "sample.mailgunna.org"]
       options[:action]      = [[:forward, "http://test-site.com"], [:stop]]
 
-      Mailgun.should_receive(:submit)
-        .with(:post, @mailgun.routes.send(:route_url), instance_of(Multimap))
+      Mailgunna.should_receive(:submit)
+        .with(:post, @mailgunna.routes.send(:route_url), instance_of(Multimap))
         .and_return("{\"route\": {\"id\": \"@sample_route_id\"}}")
       
-      @mailgun.routes.create(
+      @mailgunna.routes.create(
         options[:description],
         options[:priority],
         options[:expression],
@@ -83,19 +83,19 @@ EOF
       options = {}
       options[:description] = "test_route"
 
-      Mailgun.should_receive(:submit)
-        .with(:put, "#{@mailgun.routes.send(:route_url, @sample_route_id)}", instance_of(Multimap))
+      Mailgunna.should_receive(:submit)
+        .with(:put, "#{@mailgunna.routes.send(:route_url, @sample_route_id)}", instance_of(Multimap))
         .and_return("{\"id\": \"#{@sample_route_id}\"}")
-      @mailgun.routes.update @sample_route_id, options
+      @mailgunna.routes.update @sample_route_id, options
     end
   end
 
   describe "delete route" do
     it "should make a DELETE request with the right params" do
-      Mailgun.should_receive(:submit).
-        with(:delete, "#{@mailgun.routes.send(:route_url, @sample_route_id)}").
+      Mailgunna.should_receive(:submit).
+        with(:delete, "#{@mailgunna.routes.send(:route_url, @sample_route_id)}").
         and_return("{\"id\": \"#{@sample_route_id}\"}")
-      @mailgun.routes.destroy @sample_route_id
+      @mailgunna.routes.destroy @sample_route_id
     end
   end
 end

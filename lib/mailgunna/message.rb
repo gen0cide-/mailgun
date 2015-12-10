@@ -1,7 +1,7 @@
-module Mailgun
+module Mailgunna
   class Message
-    def initialize(mailgun, domain)
-      @mailgun = mailgun
+    def initialize(mailgunna, domain)
+      @mailgunna = mailgunna
       @domain  = domain
     end
 
@@ -15,14 +15,14 @@ module Mailgun
       # :in_test_mode BOOL. override the @use_test_mode setting
       # :tags to add tags to the email
       # :track BOOL
-      Mailgun.submit(:post, messages_url, parameters)
+      Mailgunna.submit(:post, messages_url, parameters)
     end
 
     #private
 
-    # Helper method to generate the proper url for Mailgun message API calls
+    # Helper method to generate the proper url for Mailgunna message API calls
     def messages_url
-      "#{@mailgun.base_url}/#{@domain}/messages"
+      "#{@mailgunna.base_url}/#{@domain}/messages"
     end
   end
 end

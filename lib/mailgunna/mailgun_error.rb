@@ -1,4 +1,4 @@
-module Mailgun
+module Mailgunna
   class Error
     attr_accessor :error
 
@@ -8,17 +8,17 @@ module Mailgun
         when 200
           # Not an error
         when 404
-          Mailgun::NotFound.new(options[:message])
+          Mailgunna::NotFound.new(options[:message])
         when 400
-          Mailgun::BadRequest.new(options[:message])
+          Mailgunna::BadRequest.new(options[:message])
         when 401
-          Mailgun::Unauthorized.new(options[:message])
+          Mailgunna::Unauthorized.new(options[:message])
         when 402
-          Mailgun::ResquestFailed.new(options[:message])
+          Mailgunna::ResquestFailed.new(options[:message])
         when 500, 502, 503, 504
-          Mailgun::ServerError.new(options[:message])
+          Mailgunna::ServerError.new(options[:message])
         else
-          Mailgun::ErrorBase.new(options[:message])
+          Mailgunna::ErrorBase.new(options[:message])
         end
     end
 

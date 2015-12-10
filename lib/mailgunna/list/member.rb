@@ -1,22 +1,22 @@
-module Mailgun
+module Mailgunna
   # List Member functionality
-  # Refer Mailgun docs for optional params
+  # Refer Mailgunna docs for optional params
   class MailingList::Member
 
-    # Used internally, called from Mailgun::Base
-    def initialize(mailgun, address)
-      @mailgun = mailgun
+    # Used internally, called from Mailgunna::Base
+    def initialize(mailgunna, address)
+      @mailgunna = mailgunna
       @address = address
     end
 
     # List all mailing list members
     def list(options={})
-      response = Mailgun.submit(:get, list_member_url, options)["items"]
+      response = Mailgunna.submit(:get, list_member_url, options)["items"]
     end
 
     # List a single mailing list member by a given address
     def find(member_address)
-      Mailgun.submit :get, list_member_url(member_address)
+      Mailgunna.submit :get, list_member_url(member_address)
     end
 
 
@@ -24,7 +24,7 @@ module Mailgun
     # NOTE Use create instead of add?
     def add(member_address, options={})
       params = {:address => member_address}
-      Mailgun.submit :post, list_member_url, params.merge(options)
+      Mailgunna.submit :post, list_member_url, params.merge(options)
     end
 
     # TODO add spec?
@@ -33,20 +33,20 @@ module Mailgun
     # Update a mailing list member with a given address
     def update(member_address, options={})
       params = {:address => member_address}
-      Mailgun.submit :put, list_member_url(member_address), params.merge(options)
+      Mailgunna.submit :put, list_member_url(member_address), params.merge(options)
     end   
 
     # Deletes a mailing list member with a given address
     def remove(member_address)
-      Mailgun.submit :delete, list_member_url(member_address)
+      Mailgunna.submit :delete, list_member_url(member_address)
     end
 
 
     private
 
-    # Helper method to generate the proper url for Mailgun mailbox API calls
+    # Helper method to generate the proper url for Mailgunna mailbox API calls
     def list_member_url(member_address=nil)
-      "#{@mailgun.base_url}/lists#{'/' + @address}/members#{'/' + member_address if member_address}"
+      "#{@mailgunna.base_url}/lists#{'/' + @address}/members#{'/' + member_address if member_address}"
     end
     
   end

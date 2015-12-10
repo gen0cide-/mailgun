@@ -8,10 +8,10 @@
 #   return signature == hmac.digest('hex');
 # },
 
-module Mailgun
+module Mailgunna
   class Secure
-    def initialize(mailgun)
-      @mailgun = mailgun
+    def initialize(mailgunna)
+      @mailgunna = mailgunna
     end
     
     # check request auth
@@ -23,7 +23,7 @@ module Mailgun
       
       return signature == OpenSSL::HMAC.hexdigest(
         OpenSSL::Digest::Digest.new('sha256'),
-        Mailgun.api_key,
+        Mailgunna.api_key,
         '%s%s' % [timestamp, token])
     end
   end

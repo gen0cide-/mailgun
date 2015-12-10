@@ -1,16 +1,16 @@
-module Mailgun
+module Mailgunna
   class Route
 
-    def initialize(mailgun)
-      @mailgun = mailgun
+    def initialize(mailgunna)
+      @mailgunna = mailgunna
     end
     
     def list(options={})
-      Mailgun.submit(:get, route_url, options)["items"] || []
+      Mailgunna.submit(:get, route_url, options)["items"] || []
     end
 
     def find(route_id)
-      Mailgun.submit(:get, route_url(route_id))["route"]
+      Mailgunna.submit(:get, route_url(route_id))["route"]
     end
 
     def create(description, priority, filter, actions)
@@ -29,7 +29,7 @@ module Mailgun
       data = data.to_hash
 
       # TODO: Raise an error or return false if unable to create route
-      Mailgun.submit(:post, route_url, data)["route"]["id"]
+      Mailgunna.submit(:post, route_url, data)["route"]["id"]
     end
 
     def update(route_id, params)
@@ -49,17 +49,17 @@ module Mailgun
         end
       end
 
-      Mailgun.submit(:put, route_url(route_id), data)
+      Mailgunna.submit(:put, route_url(route_id), data)
     end
     
     def destroy(route_id)
-      Mailgun.submit(:delete, route_url(route_id))["id"]
+      Mailgunna.submit(:delete, route_url(route_id))["id"]
     end
     
     private
 
     def route_url(route_id=nil)
-      "#{@mailgun.base_url}/routes#{'/' + route_id if route_id}"
+      "#{@mailgunna.base_url}/routes#{'/' + route_id if route_id}"
     end
 
     def build_actions(actions)
@@ -72,7 +72,7 @@ module Mailgun
         when :stop
           _actions << "stop()"
         else
-          raise Mailgun::Error.new("Unsupported action requested, see http://documentation.mailgun.net/user_manual.html#routes for a list of allowed actions")
+          raise Mailgunna::Error.new("Unsupported action requested, see http://documentation.mailgunna.net/user_manual.html#routes for a list of allowed actions")
         end
       end
 
@@ -89,7 +89,7 @@ module Mailgun
       when :catch_all
         return "catch_all()"
       else
-        raise Mailgun::Error.new("Unsupported filter requested, see http://documentation.mailgun.net/user_manual.html#routes for a list of allowed filters")
+        raise Mailgunna::Error.new("Unsupported filter requested, see http://documentation.mailgunna.net/user_manual.html#routes for a list of allowed filters")
       end
     end
   end

@@ -3,14 +3,14 @@
 Gem::Specification.new do |gem|
   gem.authors       = ["Akash Manohar J", "Sean Grove"]
   gem.email         = ["akash@akash.im"]
-  gem.description   = %q{Mailgun library for Ruby}
-  gem.summary       = %q{Idiomatic library for using the mailgun API from within ruby}
-  gem.homepage      = "http://github.com/HashNuke/mailgun"
+  gem.description   = %q{Mailgunna library for Ruby}
+  gem.summary       = %q{Idiomatic library for using the mailgunna API from within ruby}
+  gem.homepage      = "http://github.com/HashNuke/mailgunna"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.name          = "mailgun"
+  gem.name          = "mailgunnana"
   gem.require_paths = ["lib"]
   gem.version       = "0.8"
   
